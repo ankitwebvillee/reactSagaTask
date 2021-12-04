@@ -9,6 +9,7 @@ const initialState = {
 const messageReducer = (state = initialState, action) => {
 	if (action.type === messageApi.messageSuccess || action.type === messageApi.messageFailed) {
 		return {
+			...state,
 			messageData: action.response,
 			isLoading: false,
 		};
@@ -19,6 +20,7 @@ const messageReducer = (state = initialState, action) => {
 		};
 	} else if (action.type === sendMessageApi.sendMessageSuccess || action.type === sendMessageApi.sendMessageFailed) {
 		return {
+			...state,
 			sendMessageData: action.response,
 			isLoading: false,
 		};
@@ -29,6 +31,7 @@ const messageReducer = (state = initialState, action) => {
 		};
 	} else if (action.type === getMessageByIdApi.getMessageByIdInitiated || action.type === getMessageByIdApi.getMessageByIdFailed) {
 		return {
+			...state,
 			getMessageData: action.response,
 			isLoading: false,
 		};

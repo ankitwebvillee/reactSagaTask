@@ -1,12 +1,13 @@
 import { notification } from 'antd';
 import axios from 'axios';
-import { takeLatest, takeEvery, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import { conversationApi, sendConversationApi, getConversationByIdApi } from '../actions/actionType';
 
 export const conversationService = async (request) => {
     const config = {
         headers: {
             user_id: request.payload.user_id,
+            'Content-Type': 'application/json'
         }
     }
     const response = await axios.get(
@@ -18,9 +19,11 @@ export const conversationService = async (request) => {
 };
 
 export const sendConversationService = async (request) => {
-    const config = {
+    const rawData = {
         title: request.payload.title,
-        contact_ids: request.payload.contact_ids,
+        contact_ids: request.payload.contact_ids
+    }
+    const config = {
         headers: {
             'user_id': request.payload.user_id,
             'Content-Type': 'application/json'
@@ -28,6 +31,7 @@ export const sendConversationService = async (request) => {
     }
     const response = await axios.post(
         `${process.env.REACT_APP_API_BASEURL}/conversations`,
+        JSON.stringify(rawData),
         config
     );
     const data = response.data;
@@ -38,6 +42,7 @@ export const getConversationByIdService = async (request) => {
     const config = {
         headers: {
             user_id: request.payload.user_id,
+            'Content-Type': 'application/json'
         }
     }
     const response = await axios.get(

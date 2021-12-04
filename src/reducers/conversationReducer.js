@@ -9,6 +9,7 @@ const initialState = {
 const conversationReducer = (state = initialState, action) => {
 	if (action.type === conversationApi.conversationSuccess || action.type === conversationApi.conversationFailed) {
 		return {
+			...state,
 			conversationData: action.response,
 			isLoading: false,
 		};
@@ -19,6 +20,7 @@ const conversationReducer = (state = initialState, action) => {
 		};
 	} else if (action.type === sendConversationApi.sendConversationSuccess || action.type === sendConversationApi.sendConversationFailed) {
 		return {
+			...state,
 			sendConversationData: action.response,
 			isLoading: false,
 		};
@@ -29,6 +31,7 @@ const conversationReducer = (state = initialState, action) => {
 		};
 	} else if (action.type === getConversationByIdApi.getConversationByIdSuccess || action.type === getConversationByIdApi.getConversationByIdFailed) {
 		return {
+			...state,
 			getConversationByIdData: action.response,
 			isLoading: false,
 		};

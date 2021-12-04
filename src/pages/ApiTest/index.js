@@ -1,13 +1,17 @@
-import React from 'react'
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { contactAction } from '../actions/contactActions';
-import { conversationAction, getConversationAction, sendConversationAction } from '../actions/conversationActions';
-import { getMessageByIdAction, messageAction, sendMessageAction } from '../actions/messageActions';
+import React, {useEffect} from 'react'
+// import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { contactAction } from '../../actions/contactActions';
+import { conversationAction, getConversationAction, sendConversationAction } from '../../actions/conversationActions';
+import { getMessageByIdAction, messageAction, sendMessageAction } from '../../actions/messageActions';
 
-export default function Home(props) {
+export default function ApiTest(props) {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log(props)
+    }, [props])
 
     return (
         <div>
@@ -67,6 +71,7 @@ export default function Home(props) {
                     sendMessageAction({
                         user_id: 1,
                         conversation_id: 1,
+                        content: 'hello'
                     }),
                 )
             }}>send message /conversations/:id/messages POST

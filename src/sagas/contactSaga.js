@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import axios from 'axios';
-import { takeLatest, takeEvery, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import { contactApi } from '../actions/actionType';
 
 export const contactService = async (request) => {
@@ -12,6 +12,7 @@ export const contactService = async (request) => {
 };
 
 export function* contactWatcher(payload) {
+	console.log(payload, 'contactwatcher')
 	try {
 		const response = yield call(contactService, payload);
 		yield put({ type: contactApi.contactSuccess, response });

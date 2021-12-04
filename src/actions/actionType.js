@@ -45,3 +45,6 @@ export const getMessageByIdApi = {
 	getMessageByIdSuccess: 'getMessageByIdMessageSuccess',
 	getMessageByIdFailed: 'getMessageByIdMessageFailed',
 };
+
+export const CONNECT_SOCKET = "CONNECT_SOCKET"
+export const ADD_DATA = "ADD_DATA"
