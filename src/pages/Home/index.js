@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { contactAction } from '../../actions/contactActions';
 import { selectedDataAction } from '../../actions/selectedDataAction';
-import UserDetailCard from '../../components/UserDetailCard'
+import UserDetailCard from '../../components/UserDetailCard';
 
-export default function Home() {
+
+export default function Home(props) {
 
     const dispatch = useDispatch();
     const { contactsData } = useSelector((state) => state.contact);
+    const { selectedUser } = useSelector((state) => state.selectedData);
 
     useEffect(() => {
         dispatch(contactAction())
@@ -25,20 +27,21 @@ export default function Home() {
                             </div>
                             <div class="info_wrapper">
                                 {contactsData?.map((contact) => (
-                                    // <div onClick={()=> dispatch(selectedDataAction({'selectedUser': contact.id}))}>
+                                    <div onClick={() => dispatch(selectedDataAction({ selectedUser: contact }))}>
                                         <UserDetailCard
                                             name={contact.name}
                                             status={'Hey there! I’m using Jur chat'}
-                                            active={false}
+                                            active={selectedUser?.id === contact?.id}
                                         />
-                                    // </div>
+                                    </div>
                                 ))
                                 }
-
                             </div>
-                            <div class="slecBtn text-right">
-                                <Link to="#" class="Btn"> Continue </Link>
-                            </div>
+                            {selectedUser &&
+                                <div class="slecBtn text-right">
+                                    <Link to="/your_conversation" class="Btn"> Continue </Link>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

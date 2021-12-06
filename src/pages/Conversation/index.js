@@ -1,6 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import ChatCard from '../../components/ChatCard';
+import { useDispatch, useSelector } from 'react-redux'
+import { getConversationAction } from '../../actions/conversationActions';
+import { Link } from 'react-router-dom';
+import { sendMessageAction } from '../../actions/messageActions';
 
 export default function Conversation() {
+
+    const dispatch = useDispatch();
+    const { getConversationByIdData, sendConversationData } = useSelector((state) => state.conversation);
+    const { chatTitle, selectedUser, conversationSelectedData } = useSelector((state) => state.selectedData);
+    const [message, setMessage] = useState('')
+
+    useEffect(() => {
+        if (sendConversationData !== []) {
+            dispatch(
+                getConversationAction({
+                    user_id: selectedUser?.id,
+                    conversationId: conversationSelectedData === undefined ? sendConversationData?.id : conversationSelectedData?.id
+                }),
+            )
+        }
+    }, [sendConversationData])
 
     return (
         <>
@@ -10,66 +31,32 @@ export default function Conversation() {
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="headline_wrapper">
-                                <h3> Furniture Shopping Together </h3>
+                                <h3> {conversationSelectedData?.title ? conversationSelectedData?.title : chatTitle ? chatTitle : 'Furniture Shopping Together'} </h3>
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <div class="user_details_wrapper select-conversion">
-                                <div class="user_img_wrapper">
-                                    <img src="assets/images/avtar-img.png" />
-                                </div>
-                                <div class="content_wrapper">
-                                    <h5> Hello 👋 </h5>
-                                    <p> You at 12:03 PM Today </p>
-                                </div>
-                            </div>
-                            <div class="user_details_wrapper">
-                                <div class="user_img_wrapper r">
-                                    <img src="assets/images/avtar-img.png" />
-                                </div>
-                                <div class="content_wrapper">
-                                    <h5> Hey, rupp </h5>
-                                    <p> Fu Shang at 12:04 PM Today </p>
-                                </div>
-                            </div>
-                            <div class="user_details_wrapper">
-                                <div class="user_img_wrapper">
-                                    <img src="assets/images/avtar-img.png" />
-                                </div>
-                                <div class="content_wrapper">
-                                    <h5> *Supp </h5>
-                                    <p> Fu Shang at 12:04 PM Today </p>
-                                </div>
-                            </div>
-                            <div class="user_details_wrapper">
-                                <div class="user_img_wrapper">
-                                    <img src="assets/images/avtar-img.png" />
-                                </div>
-                                <div class="content_wrapper">
-                                    <h5> So what’s the plan </h5>
-                                    <p> Rama Jr at 12:05 PM Today </p>
-                                </div>
-                            </div>
-                            <div class="user_details_wrapper select-conversion">
-                                <div class="user_img_wrapper">
-                                    <img src="assets/images/avtar-img.png" />
-                                </div>
-                                <div class="content_wrapper">
-                                    <h5> Here is what I propose. Let me know if suits you folks. Then we can finalize </h5>
-                                    <p> You at 12:09 PM Today </p>
-                                </div>
-                            </div>
+                            {getConversationByIdData?.recent_messages?.map((chat) => (
+
+                                <ChatCard sender_name={chat.sender_name} content={chat.content} />
+
+                            ))}
                         </div>
                         <div class="col-md-10">
                             <div class="row align-items-center pt-5">
                                 <div class="col-md-9">
                                     <div class="user-input-section">
-                                        <input type="search" class="userinput" placeholder=" We can list down items and then decide on marketplaceI  " name="name" />
+                                        <input type="search" class="userinput" placeholder=" We can list down items and then decide on marketplaceI  " name="name" onChange={(e) => setMessage(e.target.value)} />
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="slecBtn text-right">
-                                        <a href="#" class="Btn stBtn"> Send </a>
+                                        <Link to="#" class="Btn stBtn" onClick={() => dispatch(
+                                            sendMessageAction({
+                                                user_id: selectedUser?.id,
+                                                conversation_id: conversationSelectedData === undefined ? sendConversationData?.id : conversationSelectedData?.id,
+                                                content: message
+                                            }),
+                                        )}> Send </Link>
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import { conversationAction } from '../../actions/conversationActions';
+import { selectedDataAction } from '../../actions/selectedDataAction';
+import ConversationCard from '../../components/ConversationCard';
 
 export default function YourConversation() {
-    
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { conversationData } = useSelector((state) => state.conversation);
+    const { selectedUser } = useSelector((state) => state.selectedData);
+
+    useEffect(() => {
+        dispatch(
+            conversationAction({
+                user_id: selectedUser?.id,
+            }),
+        )
+    }, [selectedUser])
+
     return (
         <div>
             <section class="main_wrapper">
@@ -14,51 +32,11 @@ export default function YourConversation() {
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <div class="user_details_wrapper indx-conversion">
-                                <div class="user_img_wrapper">
-                                    <img src="assets/images/avtar-img.png" />
+                            {conversationData?.map((conversation, index) => (
+                                <div onClick={() => {dispatch(selectedDataAction({ conversationSelectedData: conversation })); navigate('/conversation') }}>
+                                    <ConversationCard title={conversation.title} last_message={conversation.last_message} sender_name={conversation.sender_name} active={false} />
                                 </div>
-                                <div class="content_wrapper">
-                                    <h5> Furniture Shopping Together </h5>
-                                    <p> You <br /> Here is what I propose.Let me know if suits you folks.Then we can finalize </p>
-                                </div>
-                            </div>
-                            <div class="user_details_wrapper">
-                                <div class="user_img_wrapper r">
-                                    <img src="assets/images/avtar-img.png" />
-                                </div>
-                                <div class="content_wrapper">
-                                    <h5> Time Square Buddies </h5>
-                                    <p> Rock Lue <br /> I was planning for a burger night today </p>
-                                </div>
-                            </div>
-                            <div class="user_details_wrapper">
-                                <div class="user_img_wrapper">
-                                    <img src="assets/images/avtar-img.png" />
-                                </div>
-                                <div class="content_wrapper">
-                                    <h5> Third Conversation </h5>
-                                    <p> Sender Name <br /> Last message sent to this conversation </p>
-                                </div>
-                            </div>
-                            <div class="user_details_wrapper indx-conversion">
-                                <div class="user_img_wrapper">
-                                    <img src="assets/images/avtar-img.png" />
-                                </div>
-                                <div class="content_wrapper">
-                                    <h5> Morning Cyclists </h5>
-                                    <p> You <br /> I’m in for tomorrwo morning 🚲 </p>
-                                </div>
-                            </div>
-                            <div class="user_details_wrapper">
-                                <div class="user_img_wrapper">
-                                    <img src="assets/images/avtar-img.png" />
-                                </div>
-                                <div class="content_wrapper">
-                                    <h5> Conversation Title </h5>
-                                    <p> Sender Name <br /> Last message sent to this conversation </p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -66,7 +44,7 @@ export default function YourConversation() {
                     <div class="row align-items-center mt-5 mb-5">
                         <div class="col-5 offset-7">
                             <div class="slecBtn text-right">
-                                <a href="#" class="Btn stBtn"> Create New Conversation </a>
+                                <Link to="/select_contact" class="Btn stBtn"> Create New Conversation </Link>
                             </div>
                         </div>
                     </div>

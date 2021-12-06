@@ -3,14 +3,14 @@ import conversationReducer from './conversationReducer';
 import contactReducer from './contactReducer';
 import messageReducer from './messageReducer';
 import socketReducer from './socketReducer';
-import { selectedDataSaga } from '../sagas/selectedDataSaga';
+import selectedDataReducer from './selectedDataReducer';
 
 const rootReducer = combineReducers({
 	conversation: conversationReducer,
 	contact: contactReducer,
 	message: messageReducer,
 	socket: socketReducer,
-	selectedData: selectedDataSaga
+	selectedData: selectedDataReducer,
 });
 
 export default rootReducer;

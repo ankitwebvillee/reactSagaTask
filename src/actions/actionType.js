@@ -46,5 +46,14 @@ export const getMessageByIdApi = {
 	getMessageByIdFailed: 'getMessageByIdMessageFailed',
 };
 
-export const CONNECT_SOCKET = "CONNECT_SOCKET"
-export const ADD_DATA = "ADD_DATA"
+export const connectSocket = {
+	CONNECT_SOCKET_INITIATE: 'CONNECT_SOCKET_INITIATE',
+	CONNECT_SOCKET_SUCCESS: 'CONNECT_SOCKET_SUCCESS',
+	CONNECT_SOCKET_FAILED: 'CONNECT_SOCKET_FAILED',
+};
+
+export const ADD_DATA = {
+	addDataInitiate: 'addDataInitiate',
+	addDataSuccess: 'addDataSuccess',
+	addDataFailed: 'addDataFailed',
+};

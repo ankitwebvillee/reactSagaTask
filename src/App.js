@@ -3,17 +3,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import Conversation from './pages/Conversation';
 import { useEffect, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ApiTest from './pages/ApiTest';
 import SelectContact from './pages/SelectContact';
 import TypeTitle from './pages/TypeTitle';
 import YourConversation from './pages/YourConversation';
+import { getMessageByIdAction } from './actions/messageActions';
 // import { CONNECT_SOCKET } from './actions/actionType';
 
 function App() {
   const [socket, setSocket] = useState(null)
-  // const dispatch = useDispatch();
-  // const { socket } = useSelector(state => state.socketReducer)
+  const dispatch = useDispatch();
+  const { conversationData } = useSelector(state => state.conversation)
 
   useEffect(() => {
     if (socket === null) {
@@ -24,14 +25,27 @@ function App() {
 
   const connectSockets = () => {
     const ws = new WebSocket('ws://34.122.252.114:3000/cable/')
+
     ws.onopen = () => {
       console.log('connected')
       setSocket(ws)
+      ws.send(JSON.stringify({
+        command: 'subscribe',
+        identifier: JSON.stringify({
+          channel: 'NotificationsChannel',
+        }),
+      }));
     }
 
     ws.onmessage = evt => {
       const message = JSON.parse(evt.data)
-      console.log(message)
+      {message?.message?.sender_name !== undefined &&
+        dispatch({
+          type: "NEW_MESSAGE",
+          payload: message.message
+        })
+      }
+
     }
 
     ws.onclose = () => {
@@ -42,10 +56,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Home socket={socket} />} />
+        <Route exact path="/" element={<Home />} />
         <Route exact path="/select_contact" element={<SelectContact />} />
         <Route exact path="/type_title" element={<TypeTitle />} />
-        <Route exact path="/conversation" element={<Conversation />} />
+        <Route exact path="/conversation" element={<Conversation socket={socket} />} />
         <Route exact path="/your_conversation" element={<YourConversation />} />
         <Route exact path="/apitest" element={<ApiTest />} />
       </Routes>

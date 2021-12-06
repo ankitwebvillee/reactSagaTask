@@ -34,6 +34,7 @@ export const sendConversationService = async (request) => {
         JSON.stringify(rawData),
         config
     );
+    request.payload.navigate('/conversation')
     const data = response.data;
     return data;
 };

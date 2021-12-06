@@ -13,6 +13,14 @@ const conversationReducer = (state = initialState, action) => {
 			conversationData: action.response,
 			isLoading: false,
 		};
+	} else if(action.type === "NEW_MESSAGE"){
+		return {
+			...state,
+			getConversationByIdData: [
+				state.getConversationByIdData,
+				action.payload
+			],
+		};
 	} else if (action.type === conversationApi.conversationInitiated) {
 		return {
 			...state,

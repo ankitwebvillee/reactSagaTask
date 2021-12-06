@@ -1,5 +1,5 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { CONNECT_SOCKET } from '../actions/actionType';
+import { connectSocket } from '../actions/actionType';
 
 export const socketService = async (request) => {
 
@@ -10,14 +10,14 @@ export const socketService = async (request) => {
 export function* socketWatcher() {
     try {
         const response = yield call(socketService);
-        yield put({ type: CONNECT_SOCKET, response });
+        yield put({ type: connectSocket.CONNECT_SOCKET_SUCCESS, response });
     } catch (error) {
-        yield put({ type: CONNECT_SOCKET, error });
+        yield put({ type: connectSocket.CONNECT_SOCKET_FAILED, error });
     }
 }
 
 function* socketSaga() {
-    yield takeLatest(CONNECT_SOCKET, socketWatcher);
+    yield takeLatest(connectSocket.CONNECT_SOCKET_INITIATE, socketWatcher);
 }
 
 export { socketSaga };
