@@ -2,21 +2,21 @@ import { conversationApi, sendConversationApi, getConversationByIdApi } from './
 
 export const conversationAction = (payload) => {
 	return {
-		type: conversationApi.conversationInitiated,
+		type: conversationApi.CONVERSATION_INITIATED,
 		payload,
 	};
 };
 
 export const sendConversationAction = (payload) => {
 	return {
-		type: sendConversationApi.sendConversationInitiated,
+		type: sendConversationApi.SEND_CONVERSATION_INITIATED,
 		payload,
 	};
 };
 
 export const getConversationAction = (payload) => {
 	return {
-		type: getConversationByIdApi.getConversationByIdInitiated,
+		type: getConversationByIdApi.GET_CONVERSATION_BYID_INITAITED,
 		payload,
 	};
 };

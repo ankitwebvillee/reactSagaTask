@@ -9,6 +9,7 @@ import SelectContact from './pages/SelectContact';
 import TypeTitle from './pages/TypeTitle';
 import YourConversation from './pages/YourConversation';
 import { getMessageByIdAction } from './actions/messageActions';
+import { notification } from 'antd';
 // import { CONNECT_SOCKET } from './actions/actionType';
 
 function App() {
@@ -40,6 +41,11 @@ function App() {
     ws.onmessage = evt => {
       const message = JSON.parse(evt.data)
       {message?.message?.sender_name !== undefined &&
+        notification.info({
+          message: message.message.title,
+          description:
+              message.message.sender_name,
+      });
         dispatch({
           type: "NEW_MESSAGE",
           payload: message.message

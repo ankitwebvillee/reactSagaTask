@@ -7,7 +7,7 @@ const initialState = {
 	getConversationByIdData: []
 };
 const conversationReducer = (state = initialState, action) => {
-	if (action.type === conversationApi.conversationSuccess || action.type === conversationApi.conversationFailed) {
+	if (action.type === conversationApi.CONVERSATION_SUCCESS || action.type === conversationApi.CONVERSATION_FAILED) {
 		return {
 			...state,
 			conversationData: action.response,
@@ -21,29 +21,29 @@ const conversationReducer = (state = initialState, action) => {
 				action.payload
 			],
 		};
-	} else if (action.type === conversationApi.conversationInitiated) {
+	} else if (action.type === conversationApi.CONVERSATION_INITIATED) {
 		return {
 			...state,
 			isLoading: true,
 		};
-	} else if (action.type === sendConversationApi.sendConversationSuccess || action.type === sendConversationApi.sendConversationFailed) {
+	} else if (action.type === sendConversationApi.SEND_CONVERSATION_SUCCESS || action.type === sendConversationApi.SEND_CONVERSATION_FAILED) {
 		return {
 			...state,
 			sendConversationData: action.response,
 			isLoading: false,
 		};
-	} else if (action.type === sendConversationApi.sendConversationInitiated) {
+	} else if (action.type === sendConversationApi.SEND_CONVERSATION_INITIATED) {
 		return {
 			...state,
 			isLoading: true,
 		};
-	} else if (action.type === getConversationByIdApi.getConversationByIdSuccess || action.type === getConversationByIdApi.getConversationByIdFailed) {
+	} else if (action.type === getConversationByIdApi.GET_CONVERSATION_BYID_SUCCESS || action.type === getConversationByIdApi.GET_CONVERSATION_BYID_FAILED) {
 		return {
 			...state,
 			getConversationByIdData: action.response,
 			isLoading: false,
 		};
-	} else if (action.type === getConversationByIdApi.getConversationByIdInitiated) {
+	} else if (action.type === getConversationByIdApi.GET_CONVERSATION_BYID_INITAITED) {
 		return {
 			...state,
 			isLoading: true,

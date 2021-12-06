@@ -55,47 +55,47 @@ export const getMessageByIdService = async (request) => {
 export function* messageWatcher(payload) {
 	try {
 		const response = yield call(messageService, payload);
-		yield put({ type: messageApi.messageSuccess, response });
+		yield put({ type: messageApi.MESSAGE_SUCCESS, response });
 	} catch (error) {
 		notification.warning({
             message: 'Internal Server Error',
             description:
                 'Please try again after some time.',
         });
-		yield put({ type: messageApi.messageFailed, error });
+		yield put({ type: messageApi.MESSAGE_FAILED, error });
 	}
 }
 export function* sendMessageWatcher(payload) {
 	try {
 		const response = yield call(sendMessageService, payload);
-		yield put({ type: sendMessageApi.sendMessageSuccess, response });
+		yield put({ type: sendMessageApi.SEND_MESSAGE_SUCCESS, response });
 	} catch (error) {
 		notification.warning({
             message: 'Internal Server Error',
             description:
                 'Please try again after some time.',
         });
-		yield put({ type: sendMessageApi.sendMessageFailed, error });
+		yield put({ type: sendMessageApi.SEND_MESSAGE_FAILED, error });
 	}
 }
 export function* getMessageByIdWatcher(payload) {
 	try {
 		const response = yield call(getMessageByIdService, payload);
-		yield put({ type: getMessageByIdApi.getMessageByIdSuccess, response });
+		yield put({ type: getMessageByIdApi.GET_MESSAGE_BYID_SUCCESS, response });
 	} catch (error) {
 		notification.warning({
             message: 'Internal Server Error',
             description:
                 'Please try again after some time.',
         });
-		yield put({ type: getMessageByIdApi.getMessageByIdFailed, error });
+		yield put({ type: getMessageByIdApi.GET_MESSAGE_BYID_FAILED, error });
 	}
 }
 
 function* messageSaga() {
-	yield takeLatest(messageApi.messageInitiated, messageWatcher);
-	yield takeLatest(sendMessageApi.sendMessageInitiated, sendMessageWatcher);
-	yield takeLatest(getMessageByIdApi.getMessageByIdInitiated, getMessageByIdWatcher);
+	yield takeLatest(messageApi.MESSAGE_INITIATED, messageWatcher);
+	yield takeLatest(sendMessageApi.SEND_MESSAGE_INITIATED, sendMessageWatcher);
+	yield takeLatest(getMessageByIdApi.GET_MESSAGE_BYID_INITIATED, getMessageByIdWatcher);
 }
 
 export { messageSaga };

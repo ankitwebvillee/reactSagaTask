@@ -14,20 +14,20 @@ export default function TypeTitle() {
 
     return (
         <>
-            <section class="main_wrapper">
+            <section className="main_wrapper">
 
-                <div class="container custome-container">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <div class="col-sm-12">
-                                <div class="headline_wrapper text-center">
+                <div className="container custome-container">
+                    <div className="row">
+                        <div className="col-md-8 offset-md-2">
+                            <div className="col-sm-12">
+                                <div className="headline_wrapper text-center">
                                     <h3> Welcome {selectedUser?.name}! </h3>
                                     <p> Give title to start a new conversation with {chatUsers?.length} participants </p>
                                 </div>
 
                             </div>
-                            <div class="usr_seection">
-                                <div class="user_section_details">
+                            <div className="usr_seection">
+                                <div className="user_section_details">
                                     {chatUsers?.map((user) => (
                                         <SelectedUserCard name={user.name} status={"Hey there! I’m using Jur chat"} />
                                     ))}
@@ -35,21 +35,21 @@ export default function TypeTitle() {
                             </div>
                         </div>
                     </div>
-                    <div class="headlie_arow">
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <div className="headlie_arow">
+                        <i className="fa fa-angle-left" aria-hidden="true"></i>
                     </div>
                 </div>
-                <div class="container-fluid">
-                    <div class="row select-section-wrapper">
-                        <div class="col-lg-8  col-md-10 offset-lg-2 offset-md-1">
-                            <div class="row align-items-center">
-                                <div class="col-md-7">
-                                    <div class="user-input-section">
-                                        <input type="search" class="userinput" placeholder=" Furniture Shopping TogetherI " name="name" onChange={(e) => dispatch(selectedDataAction({ chatTitle: e.target.value }))} />
+                <div className="container-fluid">
+                    <div className="row select-section-wrapper">
+                        <div className="col-lg-8  col-md-10 offset-lg-2 offset-md-1">
+                            <div className="row align-items-center">
+                                <div className="col-md-7">
+                                    <div className="user-input-section">
+                                        <input type="search" className="userinput" placeholder=" Furniture Shopping TogetherI " name="name" onChange={(e) => dispatch(selectedDataAction({ chatTitle: e.target.value }))} />
                                     </div>
                                 </div>
-                                <div class="col-md-5">
-                                    <div class="slecBtn text-right" onClick={() => dispatch(
+                                <div className="col-md-5">
+                                    <div className="slecBtn text-right" onClick={() => dispatch(
                                         sendConversationAction({
                                             user_id: selectedUser?.id,
                                             title: chatTitle,
@@ -57,7 +57,7 @@ export default function TypeTitle() {
                                             navigate: navigate
                                         }),
                                     )}>
-                                        <Link to="#" class="Btn stBtn"> Start Conversation </Link>
+                                        <Link to="#" className="Btn stBtn"> Start Conversation </Link>
                                     </div>
                                 </div>
                             </div>

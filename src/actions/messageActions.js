@@ -2,21 +2,21 @@ import { messageApi, sendMessageApi, getMessageByIdApi } from './actionType';
 
 export const messageAction = (payload) => {
 	return {
-		type: messageApi.messageInitiated,
+		type: messageApi.MESSAGE_INITIATED,
 		payload,
 	};
 };
 
 export const sendMessageAction = (payload) => {
 	return {
-		type: sendMessageApi.sendMessageInitiated,
+		type: sendMessageApi.SEND_MESSAGE_INITIATED,
 		payload,
 	};
 };
 
 export const getMessageByIdAction = (payload) => {
 	return {
-		type: getMessageByIdApi.getMessageByIdInitiated,
+		type: getMessageByIdApi.GET_MESSAGE_BYID_INITIATED,
 		payload,
 	};
 };

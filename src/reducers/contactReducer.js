@@ -5,12 +5,12 @@ const initialState = {
 	contactsData: [],
 };
 const contactReducer = (state = initialState, action) => {
-	if (action.type === contactApi.contactSuccess || action.type === contactApi.contactFailed) {
+	if (action.type === contactApi.CONTACT_SUCCESS || action.type === contactApi.CONTACT_FAILED) {
 		return {
 			contactsData: action.response,
 			isLoading: false,
 		};
-	} else if (action.type === contactApi.contactInitiated) {
+	} else if (action.type === contactApi.CONTACT_INITIATED) {
 		return {
 			...state,
 			isLoading: true,

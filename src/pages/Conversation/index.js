@@ -25,32 +25,32 @@ export default function Conversation() {
 
     return (
         <>
-            <section class="main_wrapper">
+            <section className="main_wrapper">
 
-                <div class="container custome-container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="headline_wrapper">
+                <div className="container custome-container">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <div className="headline_wrapper">
                                 <h3> {conversationSelectedData?.title ? conversationSelectedData?.title : chatTitle ? chatTitle : 'Furniture Shopping Together'} </h3>
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div className="col-sm-12">
                             {getConversationByIdData?.recent_messages?.map((chat) => (
 
                                 <ChatCard sender_name={chat.sender_name} content={chat.content} />
 
                             ))}
                         </div>
-                        <div class="col-md-10">
-                            <div class="row align-items-center pt-5">
-                                <div class="col-md-9">
-                                    <div class="user-input-section">
-                                        <input type="search" class="userinput" placeholder=" We can list down items and then decide on marketplaceI  " name="name" onChange={(e) => setMessage(e.target.value)} />
+                        <div className="col-md-10">
+                            <div className="row align-items-center pt-5">
+                                <div className="col-md-9">
+                                    <div className="user-input-section">
+                                        <input type="search" className="userinput" placeholder=" We can list down items and then decide on marketplaceI  " name="name" onChange={(e) => setMessage(e.target.value)} />
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="slecBtn text-right">
-                                        <Link to="#" class="Btn stBtn" onClick={() => dispatch(
+                                <div className="col-md-3">
+                                    <div className="slecBtn text-right">
+                                        <Link to="#" className="Btn stBtn" onClick={() => dispatch(
                                             sendMessageAction({
                                                 user_id: selectedUser?.id,
                                                 conversation_id: conversationSelectedData === undefined ? sendConversationData?.id : conversationSelectedData?.id,
@@ -62,8 +62,8 @@ export default function Conversation() {
                             </div>
                         </div>
                     </div>
-                    <div class="headlie_arow">
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <div className="headlie_arow">
+                        <i className="fa fa-angle-left" aria-hidden="true"></i>
                     </div>
                 </div>
 

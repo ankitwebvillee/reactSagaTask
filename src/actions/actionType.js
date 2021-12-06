@@ -1,59 +1,65 @@
-export const CONVERSATION_ACTION = 'CONVERSATION_ACTION';
-
-//Contact Actions
+//Contact api Actions
 export const contactApi = {
-	contactInitiated: 'contactInitiated',
-	contactSuccess: 'contactSuccess',
-	contactFailed: 'contactFailed',
+	CONTACT_INITIATED: 'CONTACT_INITIATED',
+	CONTACT_SUCCESS: 'CONTACT_SUCCESS',
+	CONTACT_FAILED: 'CONTACT_FAILED',
 };
 
 //Conversation related Actions
+// (/conversations GET API)
 export const conversationApi = {
-	conversationInitiated: 'conversationInitiated',
-	conversationSuccess: 'conversationSuccess',
-	conversationFailed: 'conversationFailed',
+	CONVERSATION_INITIATED: 'CONVERSATION_INITIATED',
+	CONVERSATION_SUCCESS: 'CONVERSATION_SUCCESS',
+	CONVERSATION_FAILED: 'CONVERSATION_FAILED',
 };
 
+// (/conversations POST API)
 export const sendConversationApi = {
-	sendConversationInitiated: 'sendConversationInitiated',
-	sendConversationSuccess: 'sendConversationSuccess',
-	sendConversationFailed: 'sendConversationFailed',
+	SEND_CONVERSATION_INITIATED: 'SEND_CONVERSATION_INITIATED',
+	SEND_CONVERSATION_SUCCESS: 'SEND_CONVERSATION_SUCCESS',
+	SEND_CONVERSATION_FAILED: 'SEND_CONVERSATION_FAILED',
 };
 
+// (/conversations/:id GET API)
 export const getConversationByIdApi = {
-	getConversationByIdInitiated: 'getConversationByIdInitiated',
-	getConversationByIdSuccess: 'getConversationByIdSuccess',
-	getConversationByIdFailed: 'getConversationByIdFailed',
+	GET_CONVERSATION_BYID_INITAITED: 'GET_CONVERSATION_BYID_INITAITED',
+	GET_CONVERSATION_BYID_SUCCESS: 'GET_CONVERSATION_BYID_SUCCESS',
+	GET_CONVERSATION_BYID_FAILED: 'GET_CONVERSATION_BYID_FAILED',
 };
 
 
 //Message related Actions
+// (/conversations/:id GET API)
 export const messageApi = {
-	messageInitiated: 'messageInitiated',
-	messageSuccess: 'messageSuccess',
-	messageFailed: 'messageFailed',
+	MESSAGE_INITIATED: 'MESSAGE_INITIATED',
+	MESSAGE_SUCCESS: 'MESSAGE_SUCCESS',
+	MESSAGE_FAILED: 'MESSAGE_FAILED',
 };
 
+// (/conversations/:id/messages POST API)
 export const sendMessageApi = {
-	sendMessageInitiated: 'sendMessageInitiated',
-	sendMessageSuccess: 'sendMessageSuccess',
-	sendMessageFailed: 'sendMessageFailed',
+	SEND_MESSAGE_INITIATED: 'SEND_MESSAGE_INITIATED',
+	SEND_MESSAGE_SUCCESS: 'SEND_MESSAGE_SUCCESS',
+	SEND_MESSAGE_FAILED: 'SEND_MESSAGE_FAILED',
 };
 
+// (/conversations/:id/messages/:messageId GET API)
 export const getMessageByIdApi = {
-	getMessageByIdInitiated: 'getMessageByIdInitiated',
-	getMessageByIdSuccess: 'getMessageByIdMessageSuccess',
-	getMessageByIdFailed: 'getMessageByIdMessageFailed',
+	GET_MESSAGE_BYID_INITIATED: 'GET_MESSAGE_BYID_INITIATED',
+	GET_MESSAGE_BYID_SUCCESS: 'getMessageByIdMessageSuccess',
+	GET_MESSAGE_BYID_FAILED: 'getMessageByIdMessageFailed',
 };
 
+// Socket Connection ActionTypes
 export const connectSocket = {
 	CONNECT_SOCKET_INITIATE: 'CONNECT_SOCKET_INITIATE',
 	CONNECT_SOCKET_SUCCESS: 'CONNECT_SOCKET_SUCCESS',
 	CONNECT_SOCKET_FAILED: 'CONNECT_SOCKET_FAILED',
 };
 
+// ActionTypes for Selected Data
 export const ADD_DATA = {
-	addDataInitiate: 'addDataInitiate',
-	addDataSuccess: 'addDataSuccess',
-	addDataFailed: 'addDataFailed',
+	ADD_DATA_INITIAED: 'ADD_DATA_INITIAED',
+	ADD_DATA_SUCCESS: 'ADD_DATA_SUCCESS',
+	ADD_DATA_FAILED: 'ADD_DATA_FAILED',
 };

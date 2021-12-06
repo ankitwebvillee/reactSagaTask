@@ -7,35 +7,35 @@ const initialState = {
     getMessageData: []
 };
 const messageReducer = (state = initialState, action) => {
-	if (action.type === messageApi.messageSuccess || action.type === messageApi.messageFailed) {
+	if (action.type === messageApi.MESSAGE_SUCCESS || action.type === messageApi.MESSAGE_FAILED) {
 		return {
 			...state,
 			messageData: action.response,
 			isLoading: false,
 		};
-	} else if (action.type === messageApi.messageInitiated) {
+	} else if (action.type === messageApi.MESSAGE_INITIATED) {
 		return {
 			...state,
 			isLoading: true,
 		};
-	} else if (action.type === sendMessageApi.sendMessageSuccess || action.type === sendMessageApi.sendMessageFailed) {
+	} else if (action.type === sendMessageApi.SEND_MESSAGE_SUCCESS || action.type === sendMessageApi.SEND_MESSAGE_FAILED) {
 		return {
 			...state,
 			sendMessageData: action.response,
 			isLoading: false,
 		};
-	} else if (action.type === sendMessageApi.sendMessageInitiated) {
+	} else if (action.type === sendMessageApi.SEND_MESSAGE_INITIATED) {
 		return {
 			...state,
 			isLoading: true,
 		};
-	} else if (action.type === getMessageByIdApi.getMessageByIdInitiated || action.type === getMessageByIdApi.getMessageByIdFailed) {
+	} else if (action.type === getMessageByIdApi.GET_MESSAGE_BYID_INITIATED || action.type === getMessageByIdApi.GET_MESSAGE_BYID_FAILED) {
 		return {
 			...state,
 			getMessageData: action.response,
 			isLoading: false,
 		};
-	} else if (action.type === getMessageByIdApi.getMessageByIdInitiated) {
+	} else if (action.type === getMessageByIdApi.GET_MESSAGE_BYID_INITIATED) {
 		return {
 			...state,
 			isLoading: true,

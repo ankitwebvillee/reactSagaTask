@@ -15,15 +15,15 @@ export function* contactWatcher(payload) {
 	console.log(payload, 'contactwatcher')
 	try {
 		const response = yield call(contactService, payload);
-		yield put({ type: contactApi.contactSuccess, response });
+		yield put({ type: contactApi.CONTACT_SUCCESS, response });
 	} catch (error) {
 		message.info('error')
-		yield put({ type: contactApi.contactFailed, error });
+		yield put({ type: contactApi.CONTACT_FAILED, error });
 	}
 }
 
 function* contactSaga() {
-	yield takeLatest(contactApi.contactInitiated, contactWatcher);
+	yield takeLatest(contactApi.CONTACT_INITIATED, contactWatcher);
 }
 
 export { contactSaga };

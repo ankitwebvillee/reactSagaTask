@@ -18,14 +18,14 @@ export default function Home(props) {
 
     return (
         <>
-            <section class="main_wrapper">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-8  offset-lg-3 offset-md-2">
-                            <div class="heading_wrapper text-center">
+            <section className="main_wrapper">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-6 col-md-8  offset-lg-3 offset-md-2">
+                            <div className="heading_wrapper text-center">
                                 <h3> Let us know who you are </h3>
                             </div>
-                            <div class="info_wrapper">
+                            <div className="info_wrapper">
                                 {contactsData?.map((contact) => (
                                     <div onClick={() => dispatch(selectedDataAction({ selectedUser: contact }))}>
                                         <UserDetailCard
@@ -38,8 +38,8 @@ export default function Home(props) {
                                 }
                             </div>
                             {selectedUser &&
-                                <div class="slecBtn text-right">
-                                    <Link to="/your_conversation" class="Btn"> Continue </Link>
+                                <div className="slecBtn text-right">
+                                    <Link to="/your_conversation" className="Btn"> Continue </Link>
                                 </div>
                             }
                         </div>

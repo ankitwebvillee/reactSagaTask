@@ -57,47 +57,48 @@ export const getConversationByIdService = async (request) => {
 export function* conversationWatcher(payload) {
     try {
         const response = yield call(conversationService, payload);
-        yield put({ type: conversationApi.conversationSuccess, response });
+        yield put({ type: conversationApi.CONVERSATION_SUCCESS, response });
     } catch (error) {
+        console.log(error)
         notification.warning({
             message: 'Internal Server Error',
             description:
                 'Please try again after some time.',
         });
-        yield put({ type: conversationApi.conversationFailed, error });
+        yield put({ type: conversationApi.CONVERSATION_FAILED, error });
     }
 }
 export function* sendConversationWatcher(payload) {
     try {
         const response = yield call(sendConversationService, payload);
-        yield put({ type: sendConversationApi.sendConversationSuccess, response });
+        yield put({ type: sendConversationApi.SEND_CONVERSATION_SUCCESS, response });
     } catch (error) {
         notification.warning({
             message: 'Internal Server Error',
             description:
                 'Please try again after some time.',
         });
-        yield put({ type: sendConversationApi.sendConversationFailed, error });
+        yield put({ type: sendConversationApi.SEND_CONVERSATION_FAILED, error });
     }
 }
 export function* getConversationByIdWatcher(payload) {
     try {
         const response = yield call(getConversationByIdService, payload);
-        yield put({ type: getConversationByIdApi.getConversationByIdSuccess, response });
+        yield put({ type: getConversationByIdApi.GET_CONVERSATION_BYID_SUCCESS, response });
     } catch (error) {
         notification.warning({
             message: 'Internal Server Error',
             description:
                 'Please try again after some time.',
         });
-        yield put({ type: getConversationByIdApi.getConversationByIdFailed, error });
+        yield put({ type: getConversationByIdApi.GET_CONVERSATION_BYID_FAILED, error });
     }
 }
 
 function* conversationSaga() {
-    yield takeLatest(conversationApi.conversationInitiated, conversationWatcher);
-    yield takeLatest(sendConversationApi.sendConversationInitiated, sendConversationWatcher);
-    yield takeLatest(getConversationByIdApi.getConversationByIdInitiated, getConversationByIdWatcher);
+    yield takeLatest(conversationApi.CONVERSATION_INITIATED, conversationWatcher);
+    yield takeLatest(sendConversationApi.SEND_CONVERSATION_INITIATED, sendConversationWatcher);
+    yield takeLatest(getConversationByIdApi.GET_CONVERSATION_BYID_INITAITED, getConversationByIdWatcher);
 }
 
 export default conversationSaga;

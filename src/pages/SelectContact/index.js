@@ -18,18 +18,18 @@ export default function SelectContact() {
 
     return (
         <div>
-            <section class="main_wrapper">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-8  offset-lg-3 offset-md-2">
-                            <div class="headline_wrapper text-center">
+            <section className="main_wrapper">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-6 col-md-8  offset-lg-3 offset-md-2">
+                            <div className="headline_wrapper text-center">
                                 <h3> Welcome George! </h3>
                                 <p> You don’t have any conversations </p>
                             </div>
-                            <div class="heading_wrapper text-center">
+                            <div className="heading_wrapper text-center">
                                 <h3> Select contacts to message </h3>
                             </div>
-                            <div class="info_wrapper">
+                            <div className="info_wrapper">
                                 {contactsData?.map((contact) => (
                                     <div onClick={() => dispatch(selectedDataAction({ chatUsers: (chatUsers ? (chatUsers?.includes(contact) ? chatUsers?.filter((item) => item.id !== contact.id) : [...chatUsers, contact]) : [contact]) }))}>
                                         <UserDetailCard
@@ -42,8 +42,8 @@ export default function SelectContact() {
                                 }
                             </div>
                             {chatUsers?.length ?
-                                <div class="slecBtn text-right">
-                                    <Link to="/type_title" class="Btn"> Continue </Link>
+                                <div className="slecBtn text-right">
+                                    <Link to="/type_title" className="Btn"> Continue </Link>
                                 </div> : ''
                             }
                         </div>
