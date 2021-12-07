@@ -35,28 +35,30 @@ export default function Conversation() {
                             </div>
                         </div>
                         <div className="col-sm-12">
-                            {getConversationByIdData?.recent_messages?.map((chat) => (
-
-                                <ChatCard sender_name={chat.sender_name} content={chat.content} />
-
+                            {getConversationByIdData?.recent_messages?.map((chat, index) => (
+                                <div key={index}>
+                                    <ChatCard sender_name={chat.sender_name} content={chat.content} />
+                                </div>
                             ))}
                         </div>
                         <div className="col-md-10">
                             <div className="row align-items-center pt-5">
                                 <div className="col-md-9">
                                     <div className="user-input-section">
-                                        <input type="search" className="userinput" placeholder=" We can list down items and then decide on marketplaceI  " name="name" onChange={(e) => setMessage(e.target.value)} />
+                                        <input type="search" className="userinput" placeholder=" We can list down items and then decide on marketplaceI  " name="name" onChange={(e) => setMessage(e.target.value)} value={message} />
                                     </div>
                                 </div>
                                 <div className="col-md-3">
                                     <div className="slecBtn text-right">
-                                        <Link to="#" className="Btn stBtn" onClick={() => dispatch(
-                                            sendMessageAction({
-                                                user_id: selectedUser?.id,
-                                                conversation_id: conversationSelectedData === undefined ? sendConversationData?.id : conversationSelectedData?.id,
-                                                content: message
-                                            }),
-                                        )}> Send </Link>
+                                        <Link to="#" className="Btn stBtn" onClick={() => {
+                                            dispatch(
+                                                sendMessageAction({
+                                                    user_id: selectedUser?.id,
+                                                    conversation_id: conversationSelectedData === undefined ? sendConversationData?.id : conversationSelectedData?.id,
+                                                    content: message
+                                                }),
+                                            ); setMessage('')
+                                        }}> Send </Link>
                                     </div>
                                 </div>
                             </div>

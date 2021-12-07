@@ -16,6 +16,7 @@ export default function YourConversation() {
         dispatch(
             conversationAction({
                 user_id: selectedUser?.id,
+                navigate: navigate,
             }),
         )
     }, [])
@@ -33,8 +34,8 @@ export default function YourConversation() {
                         </div>
                         <div className="col-sm-12">
                             {conversationData?.map((conversation, index) => (
-                                <div onClick={() => {dispatch(selectedDataAction({ conversationSelectedData: conversation })); navigate('/conversation') }}>
-                                    <ConversationCard title={conversation.title} last_message={conversation.last_message} sender_name={conversation.sender_name} active={false} />
+                                <div onClick={() => {dispatch(selectedDataAction({ conversationSelectedData: conversation })); navigate('/conversation') }} key={index}>
+                                    <ConversationCard title={conversation.title} last_message={conversation.last_message?.[0]?.content} sender_name={conversation.sender_name} active={false} />
                                 </div>
                             ))}
                         </div>

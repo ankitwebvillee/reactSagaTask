@@ -13,14 +13,18 @@ const conversationReducer = (state = initialState, action) => {
 			conversationData: action.response,
 			isLoading: false,
 		};
-	} else if(action.type === "NEW_MESSAGE"){
-		return {
-			...state,
-			getConversationByIdData: [
-				state.getConversationByIdData,
-				action.payload
-			],
-		};
+	} else if(action.type === "NEW_MESSAGE" && state?.getConversationByIdData?.recent_messages){
+		// append new messages in old recent messages array
+			return {
+				...state,
+				getConversationByIdData: {
+					...state.getConversationByIdData,
+					recent_messages: [
+						...state.getConversationByIdData?.recent_messages,
+						action.payload,
+					],
+				},
+		}
 	} else if (action.type === conversationApi.CONVERSATION_INITIATED) {
 		return {
 			...state,

@@ -26,8 +26,8 @@ export default function Home(props) {
                                 <h3> Let us know who you are </h3>
                             </div>
                             <div className="info_wrapper">
-                                {contactsData?.map((contact) => (
-                                    <div onClick={() => dispatch(selectedDataAction({ selectedUser: contact }))}>
+                                {contactsData?.map((contact, index) => (
+                                    <div onClick={() => dispatch(selectedDataAction({ selectedUser: contact }))} key={index}>
                                         <UserDetailCard
                                             name={contact.name}
                                             status={'Hey there! I’m using Jur chat'}

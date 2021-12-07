@@ -15,6 +15,7 @@ export const conversationService = async (request) => {
         config
     );
     const data = response.data;
+    response.data?.length < 1 && request.payload.navigate('/select_contact')
     return data;
 };
 

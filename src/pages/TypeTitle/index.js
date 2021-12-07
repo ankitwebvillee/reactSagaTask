@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { sendConversationAction } from '../../actions/conversationActions';
 import { selectedDataAction } from '../../actions/selectedDataAction';
-import SelectedUserCard from '../../components/SelectedUserCard'
+import SelectedUserCard from '../../components/SelectedUserCard';
 import { useNavigate } from 'react-router';
 
 export default function TypeTitle() {
@@ -28,8 +28,10 @@ export default function TypeTitle() {
                             </div>
                             <div className="usr_seection">
                                 <div className="user_section_details">
-                                    {chatUsers?.map((user) => (
-                                        <SelectedUserCard name={user.name} status={"Hey there! I’m using Jur chat"} />
+                                    {chatUsers?.map((user, index) => (
+                                        <div key={index}>
+                                            <SelectedUserCard name={user.name} status={"Hey there! I’m using Jur chat"} />
+                                        </div>
                                     ))}
                                 </div>
                             </div>

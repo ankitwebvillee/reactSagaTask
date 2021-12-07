@@ -9,7 +9,7 @@ export default function SelectContact() {
 
     const dispatch = useDispatch();
     const { contactsData } = useSelector((state) => state.contact);
-    const { chatUsers } = useSelector((state) => state.selectedData);
+    const { chatUsers, selectedUser } = useSelector((state) => state.selectedData);
 
     useEffect(() => {
         dispatch(contactAction())
@@ -30,8 +30,12 @@ export default function SelectContact() {
                                 <h3> Select contacts to message </h3>
                             </div>
                             <div className="info_wrapper">
-                                {contactsData?.map((contact) => (
-                                    <div onClick={() => dispatch(selectedDataAction({ chatUsers: (chatUsers ? (chatUsers?.includes(contact) ? chatUsers?.filter((item) => item.id !== contact.id) : [...chatUsers, contact]) : [contact]) }))}>
+                                {contactsData?.filter((item) => item.id !== selectedUser?.id).map((contact, index) => (
+                                    <div onClick={() => dispatch(
+                                        selectedDataAction({
+                                            chatUsers: (chatUsers ? (chatUsers?.includes(contact) ? chatUsers?.filter((item) => item.id !== contact.id) : [...chatUsers, contact]) : [contact])
+                                        })
+                                    )} key={index}>
                                         <UserDetailCard
                                             name={contact.name}
                                             status={'Hey there! I’m using Jur chat'}

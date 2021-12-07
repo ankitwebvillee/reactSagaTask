@@ -1,11 +1,11 @@
-import { ADD_DATA } from '../actions/actionType';
+import { addData } from '../actions/actionType';
 
 const initialState = {
 	
 };
 
 const selectedDataReducer = (state = initialState, action) => {
-	if (action.type === ADD_DATA.ADD_DATA_SUCCESS) {
+	if (action.type === addData.ADD_DATA_SUCCESS) {
 		return {
 			...state,
 			...action.payload

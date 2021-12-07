@@ -8,14 +8,14 @@ import ApiTest from './pages/ApiTest';
 import SelectContact from './pages/SelectContact';
 import TypeTitle from './pages/TypeTitle';
 import YourConversation from './pages/YourConversation';
-import { getMessageByIdAction } from './actions/messageActions';
 import { notification } from 'antd';
 // import { CONNECT_SOCKET } from './actions/actionType';
 
 function App() {
   const [socket, setSocket] = useState(null)
   const dispatch = useDispatch();
-  const { conversationData } = useSelector(state => state.conversation)
+  const { selectedUser } = useSelector((state) => state.selectedData);
+
 
   useEffect(() => {
     if (socket === null) {
@@ -24,8 +24,33 @@ function App() {
     }
   }, [socket])
 
+  useEffect(() => {
+    if(socket !== null){
+      socket.onmessage = evt => {
+        const message = JSON.parse(evt.data)
+        if (message?.type !== 'welcome' && message?.type !== 'ping' && message?.type !== 'confirm_subscription') {
+          if (selectedUser?.id !== message?.message?.sender_id && message?.message?.contact_ids?.includes(selectedUser?.id)) {
+            // Chat Notifications will only show to users who are in contact ids and not to the user who send it
+            notification.info({
+              message: message?.message?.sender_name,
+              description: message.message?.content,
+              className: "chatNoti",
+              icon: false
+            });
+          }
+
+          // Used to append new message with older messages
+          dispatch({
+            type: "NEW_MESSAGE",
+            payload: message?.message
+          })
+        }
+      }
+    }
+  }, [selectedUser])
+
   const connectSockets = () => {
-    const ws = new WebSocket('ws://34.122.252.114:3000/cable/')
+    const ws = new WebSocket(process.env.REACT_APP_SOCKET_URL) // connecting sockets
 
     ws.onopen = () => {
       console.log('connected')
@@ -36,22 +61,6 @@ function App() {
           channel: 'NotificationsChannel',
         }),
       }));
-    }
-
-    ws.onmessage = evt => {
-      const message = JSON.parse(evt.data)
-      {message?.message?.sender_name !== undefined &&
-        notification.info({
-          message: message.message.title,
-          description:
-              message.message.sender_name,
-      });
-        dispatch({
-          type: "NEW_MESSAGE",
-          payload: message.message
-        })
-      }
-
     }
 
     ws.onclose = () => {
@@ -65,7 +74,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/select_contact" element={<SelectContact />} />
         <Route exact path="/type_title" element={<TypeTitle />} />
-        <Route exact path="/conversation" element={<Conversation socket={socket} />} />
+        <Route exact path="/conversation" element={<Conversation />} />
         <Route exact path="/your_conversation" element={<YourConversation />} />
         <Route exact path="/apitest" element={<ApiTest />} />
       </Routes>

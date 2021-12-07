@@ -46,8 +46,8 @@ export const sendMessageApi = {
 // (/conversations/:id/messages/:messageId GET API)
 export const getMessageByIdApi = {
 	GET_MESSAGE_BYID_INITIATED: 'GET_MESSAGE_BYID_INITIATED',
-	GET_MESSAGE_BYID_SUCCESS: 'getMessageByIdMessageSuccess',
-	GET_MESSAGE_BYID_FAILED: 'getMessageByIdMessageFailed',
+	GET_MESSAGE_BYID_SUCCESS: 'GET_MESSAGE_BYID_SUCCESS',
+	GET_MESSAGE_BYID_FAILED: 'GET_MESSAGE_BYID_FAILED',
 };
 
 // Socket Connection ActionTypes
@@ -58,7 +58,7 @@ export const connectSocket = {
 };
 
 // ActionTypes for Selected Data
-export const ADD_DATA = {
+export const addData = {
 	ADD_DATA_INITIAED: 'ADD_DATA_INITIAED',
 	ADD_DATA_SUCCESS: 'ADD_DATA_SUCCESS',
 	ADD_DATA_FAILED: 'ADD_DATA_FAILED',
